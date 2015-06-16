@@ -1,0 +1,3 @@
+--asset LICENSE
+--exclude lib/assertion/version.rb
+--output doc/api
