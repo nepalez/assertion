@@ -9,6 +9,7 @@ require_relative "assertion/transprocs/list"
 
 require_relative "assertion/exceptions/name_error"
 require_relative "assertion/exceptions/not_implemented_error"
+require_relative "assertion/exceptions/invalid_error"
 
 # The module allows declaring assertions (assertions) about various objects,
 # and apply (validate) them to concrete data.
