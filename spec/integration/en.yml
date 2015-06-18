@@ -1,0 +1,10 @@
+# Translations of messages for examples in the `./assertion_spec.rb`
+---
+en:
+  assertion:
+    is_adult:
+      right: "%{name} is an adult (age %{age})"
+      wrong: "%{name} is a child (age %{age})"
+    is_male:
+      right: "%{name} is a male"
+      wrong: "%{name} is a female"
