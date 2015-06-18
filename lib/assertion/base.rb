@@ -27,8 +27,11 @@ module Assertion
   #     end
   #   end
   #
+  #   child = Adult.not
+  #
   #   jane = { name: "Jane", age: 12 }
   #   Adult[jane].valid? # => false
+  #   child[jane].valid? # => true
   #
   class Base
 
@@ -68,6 +71,27 @@ module Assertion
       #
       def [](hash = {})
         new(hash).call
+      end
+
+      # Initializes the intermediate inverter with `new` and `[]` methods
+      #
+      # The inverter can be used to initialize the assertion, that describes
+      # just the opposite statement to the current one
+      #
+      # @example
+      #   Adult = Assertion.about :name, :age do
+      #     age >= 18
+      #   end
+      #
+      #   joe = { name: 'Joe', age: 19 }
+      #
+      #   Adult[joe].valid?     # => true
+      #   Adult.not[joe].valid? # => false
+      #
+      # @return [Assertion::Inverter]
+      #
+      def not
+        Inverter.new(self)
       end
 
       private
