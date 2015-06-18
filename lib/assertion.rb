@@ -42,4 +42,36 @@ require_relative "assertion/base"
 #
 module Assertion
 
+  # Builds the subclass of `Assertion::Base` with predefined `attributes`
+  # and implementation of the `#check` method.
+  #
+  # @example
+  #   IsMan = Assertion.about :age, :gender do
+  #     (age >= 18) && (gender == :male)
+  #   end
+  #
+  #   # This is the same as:
+  #   class IsMan < Assertion::Base
+  #     attribute :age, :gender
+  #
+  #     def check
+  #       (age >= 18) && (gender == :male)
+  #     end
+  #   end
+  #
+  # @param [Symbol, Array<Symbol>] attributes
+  #   The list of attributes for the new assertion
+  # @param [Proc] block
+  #   The content for the `check` method
+  #
+  # @return [Assertion::Base]
+  #
+  def self.about(*attributes, &block)
+    klass = Class.new(Base)
+    klass.public_send(:attribute, attributes)
+    klass.__send__(:define_method, :check, &block) if block_given?
+
+    klass
+  end
+
 end # module Assertion
