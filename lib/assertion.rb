@@ -3,6 +3,8 @@
 require "transproc"
 require "i18n"
 
+require_relative "assertion/transprocs/inflector"
+
 # The module allows declaring assertions (assertions) about various objects,
 # and apply (validate) them to concrete data.
 #
