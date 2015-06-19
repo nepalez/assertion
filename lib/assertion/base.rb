@@ -35,33 +35,14 @@ module Assertion
   #
   class Base
 
+    extend  Attributes
+    include Messages
+
     # Class DSL
     #
     class << self
 
-      # List of attributes, defined for the class
-      #
-      # @return [Array<Symbol>]
-      #
-      def attributes
-        @attributes ||= []
-      end
-
-      # Adds a new attribute or a list of attributes to the class
-      #
-      # @param [Symbol, Array<Symbol>] names
-      #
-      # @return [undefined]
-      #
-      # @raise [Assertion::NameError]
-      #   When the name is already used by instance attribute
-      #
-      def attribute(*names)
-        @attributes = List[:symbolize][attributes + names]
-        __check__
-      end
-
-      # Initializes a assertion with some attributes (data) and then calls it
+      # Initializes an assertion with some attributes (data) and then calls it
       #
       # @param [Hash] hash
       #
@@ -96,10 +77,8 @@ module Assertion
 
       private
 
-      # Checks if all the attributes have valid names
-      def __check__
-        wrong = attributes & instance_methods
-        fail(NameError.new wrong) if wrong.any?
+      def __forbidden_attributes__
+        [:check]
       end
 
     end # eigenclass
@@ -126,28 +105,6 @@ module Assertion
       freeze
     end
 
-    # Returns the translated message about the current state of the assertion
-    # applied to its attributes
-    #
-    # @param [Symbol] state The state to be described
-    #
-    # @return [String] The message
-    #
-    def message(state = nil)
-      I18n[:translate, __scope__, attributes][state ? :right : :wrong]
-    end
-
-    # Checks whether the assertion is right for the current attributes
-    #
-    # @return [Boolean]
-    #
-    # @raise [Check::NotImplementedError]
-    #   When the [#check] method hasn't been implemented
-    #
-    def check
-      fail NotImplementedError.new(self.class, :check)
-    end
-
     # Calls the assertion checkup and returns the state of the assertion having
     # been applied to the current attributes
     #
@@ -156,26 +113,11 @@ module Assertion
     #
     def call
       state = check
-      State.new state, message
+      State.new state, message(false)
     end
 
     private
 
-    # The scope for translating messages using the `I18n` module
-    #
-    # @return [Array<Symbol>]
-    #
-    def __scope__
-      I18n[:scope][self.class.name]
-    end
-
-    # Defines the object attribute and assigns given value to it
-    #
-    # @param [Symbol] name The name of the attribute
-    # @param [Object] value The value of the attribute
-    #
-    # @return [undefined]
-    #
     def __set_attribute__(name, value)
       attributes[name] = value
       singleton_class.__send__(:define_method, name) { value }

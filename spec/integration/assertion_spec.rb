@@ -1,19 +1,10 @@
 # encoding: utf-8
 
+require "shared/i18n"
+
 describe Assertion do
 
-  let(:load_path) { Dir[File.expand_path "../*.yml", __FILE__] }
-
-  around do |example|
-    old_locale, I18n.locale = I18n.locale, :en
-    old_path, I18n.load_path = I18n.load_path, load_path
-    I18n.backend.load_translations
-
-    example.run
-
-    I18n.locale    = old_locale
-    I18n.load_path = old_path
-  end
+  include_context "preloaded translations"
 
   it "works" do
     IsMale = Assertion.about :name, :gender do

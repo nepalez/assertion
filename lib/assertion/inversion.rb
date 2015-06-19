@@ -48,7 +48,7 @@ module Assertion
     # @return [String]
     #
     def message(state = nil)
-      assertion.message(!state)
+      assertion.message !state
     end
 
     # Checks the current state of the assertion

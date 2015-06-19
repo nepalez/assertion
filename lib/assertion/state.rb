@@ -52,7 +52,7 @@ module Assertion
     # @return [true]
     #
     # @raise [Assertion::InvalidError]
-    #   When a assertion is not satisfied (validation fails)
+    #   When an assertion is not satisfied (validation fails)
     #
     def validate!
       invalid? ? fail(InvalidError.new messages) : true

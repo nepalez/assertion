@@ -52,8 +52,7 @@ describe Assertion do
       end
 
       it "doesn't implement the #check method" do
-        expect { subject[jack] }
-          .to raise_error Assertion::NotImplementedError
+        expect { subject[jack] }.to raise_error NameError
       end
 
     end # context

@@ -5,6 +5,8 @@ module Assertion
   #
   # @api private
   #
+  # @todo Extract this module to the external gem `transproc-inflector`
+  #
   module Inflector
 
     extend ::Transproc::Registry

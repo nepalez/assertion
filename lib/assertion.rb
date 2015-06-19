@@ -1,15 +1,14 @@
 # encoding: utf-8
 
 require "transproc"
-require "i18n"
 
 require_relative "assertion/transprocs/inflector"
-require_relative "assertion/transprocs/i18n"
 require_relative "assertion/transprocs/list"
 
-require_relative "assertion/exceptions/name_error"
-require_relative "assertion/exceptions/not_implemented_error"
 require_relative "assertion/exceptions/invalid_error"
+
+require_relative "assertion/attributes"
+require_relative "assertion/messages"
 
 require_relative "assertion/state"
 require_relative "assertion/base"
@@ -66,7 +65,7 @@ module Assertion
   # @param [Proc] block
   #   The content for the `check` method
   #
-  # @return [Assertion::Base]
+  # @return [Class] The specific assertion class
   #
   def self.about(*attributes, &block)
     klass = Class.new(Base)
