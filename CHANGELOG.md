@@ -1,4 +1,4 @@
-## Prepared for the next version
+## v0.1.0 2015-06-20
 
 ### Added
 
@@ -17,4 +17,4 @@
 * Removed `Assertion::I18n` (not the part of public API) (nepalez)
 * Extracted attribute DSL from `Assertion::Base` to `Assertion::Attributes` (nepalez)
 
-[Compare v0.0.1...HEAD](https://github.com/nepalez/assertion/compare/v0.0.1...HEAD)
+[Compare v0.0.1...v0.1.0](https://github.com/nepalez/assertion/compare/v0.0.1...v0.1.0)
