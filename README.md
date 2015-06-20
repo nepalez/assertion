@@ -123,12 +123,43 @@ state = IsAdult[jane] & IsMale[jane]
 # => #<Assertion::State @state=false, @messages=["Jane is a child yet (age 16)", "Jane is a female"]>
 ```
 
+Guards
+------
+
+The guard class is a lean wrapper around the state of its object.
+
+It defines the `#state` for the object and checks if the state is valid:
+
+```ruby
+class VoterOnly < Assertion::Guard
+  alias_method :user, :object
+
+  def state
+    IsAdult[user.attributes] & IsCitizen[user.attributes]
+  end
+end
+```
+
+When the guard is called for some object, its calls `#validate!` and then returns the source object. That simple.
+
+```ruby
+jack = OpenStruct.new(name: "Jack", age: 15, citizen: true)
+john = OpenStruct.new(name: "John", age: 34, citizen: true)
+
+voter = VoterOnly[jack]
+# => #<Assertion::InvalidError @messages=["Jack is a child yet (age 15)"]
+
+voter = VoterOnly[john]
+# => #<OpenStruct @name="John", @age=34>
+```
+
 Naming Convention
 -----------------
 
 This is not necessary, but for verbosity you could follow the rules:
 
 * use the prefix `Is` for assertions (like `IsAdult`)
+* use the suffix `Only` for guards (like `AdultOnly`)
 
 Edge Cases
 ----------

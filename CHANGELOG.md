@@ -2,6 +2,7 @@
 
 ### Added
 
+* New `Guard` base class for guarding objects (nepalez)
 * Custom `Assertion::InvalidError#inspect` method that shows `#messages` (nepalez)
 
 ### Deleted

@@ -13,6 +13,7 @@ require_relative "assertion/state"
 require_relative "assertion/base"
 require_relative "assertion/inversion"
 require_relative "assertion/inverter"
+require_relative "assertion/guard"
 
 # The module allows declaring assertions (assertions) about various objects,
 # and apply (validate) them to concrete data.
