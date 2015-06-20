@@ -140,6 +140,14 @@ class VoterOnly < Assertion::Guard
 end
 ```
 
+Or using the verbose builder `Assertion.guards`:
+
+```ruby
+VoterOnly = Assertion.guards :user do
+  IsAdult[user.attributes] & IsCitizen[user.attributes]
+end
+```
+
 When the guard is called for some object, its calls `#validate!` and then returns the source object. That simple.
 
 ```ruby
@@ -169,6 +177,9 @@ You cannot define attributes with names already defined as istance methods:
 ```ruby
 IsAdult = Assertion.about :check
 # => #<Assertion::NameError @message="Wrong name(s) for attribute(s): check">
+
+AdultOnly = Assertion.guards :state
+# => #<Assertion::NameError @message="Wrong name(s) for attribute(s): state">
 ```
 
 Installation

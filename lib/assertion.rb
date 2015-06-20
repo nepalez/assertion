@@ -75,4 +75,36 @@ module Assertion
     klass
   end
 
+  # Builds the subclass of `Assertion::Guard` with given attribute
+  # (alias for the `object`) and implementation of the `#state` method.
+  #
+  # @example
+  #   VoterOnly = Assertion.guards :user do
+  #     IsAdult[user.attributes] & IsCitizen[user.attributes]
+  #   end
+  #
+  #   # This is the same as:
+  #   class VoterOnly < Assertion::Guard
+  #     alias_method :user, :object
+  #
+  #     def state
+  #       IsAdult[user.attributes] & IsCitizen[user.attributes]
+  #     end
+  #   end
+  #
+  # @param [Symbol] attribute
+  #   The alias for the `object` attribute
+  # @param [Proc] block
+  #   The content for the `state` method
+  #
+  # @return [Class] The specific guard class
+  #
+  def self.guards(attribute = nil, &block)
+    klass = Class.new(Guard)
+    klass.public_send(:attribute, attribute) if attribute
+    klass.__send__(:define_method, :state, &block) if block_given?
+
+    klass
+  end
+
 end # module Assertion

@@ -2,18 +2,18 @@
 
 describe Assertion do
 
-  describe ".about" do
+  let(:john) { { age: 17, gender: :male } }
+  let(:jack) { { age: 18, gender: :male } }
 
-    let(:john) { { age: 17, gender: :male } }
-    let(:jack) { { age: 18, gender: :male } }
+  describe ".about" do
 
     context "with attributes and a block" do
 
       subject do
-        Man = Assertion.about(:age, :gender) { age >= 18 && gender == :male }
+        IsMan = Assertion.about(:age, :gender) { age >= 18 && gender == :male }
       end
 
-      it "provides the assertion class" do
+      it "builds the assertion class" do
         expect(subject.superclass).to eql Assertion::Base
       end
 
@@ -27,10 +27,10 @@ describe Assertion do
     context "without attributes" do
 
       subject do
-        Man = Assertion.about { true }
+        IsMan = Assertion.about { true }
       end
 
-      it "provides the assertion class" do
+      it "builds the assertion class" do
         expect(subject.superclass).to eql Assertion::Base
       end
 
@@ -44,21 +44,79 @@ describe Assertion do
     context "without a block" do
 
       subject do
-        Man = Assertion.about(:age, :gender)
+        IsMan = Assertion.about(:age, :gender)
       end
 
-      it "provides the assertion class" do
+      it "builds the assertion class" do
         expect(subject.superclass).to eql Assertion::Base
       end
 
       it "doesn't implement the #check method" do
-        expect { subject[jack] }.to raise_error NameError
+        expect { subject.new(jack).check }.to raise_error NoMethodError
       end
 
     end # context
 
-    after { Object.send :remove_const, :Man }
+    after { Object.send :remove_const, :IsMan }
 
   end # describe .about
+
+  describe ".guards" do
+
+    before { IsAdult = Assertion.about(:age) { age.to_i >= 18 } }
+
+    context "with an attribute and a block" do
+
+      subject { Assertion.guards(:user) { IsAdult[user] } }
+
+      it "builds the guard class" do
+        expect(subject.superclass).to eql Assertion::Guard
+      end
+
+      it "defines an alias for the object" do
+        expect(subject.new(jack).user).to eql jack
+      end
+
+      it "implements the #state" do
+        expect { subject.new(jack).state }.not_to raise_error
+      end
+
+    end # context
+
+    context "without an attribute" do
+
+      subject { Assertion.guards { IsAdult[object] } }
+
+      it "builds the guard class" do
+        expect(subject.superclass).to eql Assertion::Guard
+      end
+
+      it "implements the #state of #object" do
+        expect { subject.new(jack).state }.not_to raise_error
+      end
+
+    end # context
+
+    context "without a block" do
+
+      subject { Assertion.guards(:user) }
+
+      it "builds the guard class" do
+        expect(subject.superclass).to eql Assertion::Guard
+      end
+
+      it "defines an alias for the object" do
+        expect(subject.new(jack).user).to eql jack
+      end
+
+      it "doesn't implement the #state" do
+        expect { subject.new(jack).state }.to raise_error NoMethodError
+      end
+
+    end # context
+
+    after { Object.send :remove_const, :IsAdult   }
+
+  end # describe .guards
 
 end # describe Assertion
