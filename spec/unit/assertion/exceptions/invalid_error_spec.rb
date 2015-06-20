@@ -13,16 +13,6 @@ describe Assertion::InvalidError do
 
   end # describe .new
 
-  describe "#message" do
-
-    subject { error.message }
-
-    it "returns a proper message" do
-      expect(subject).to include "#{messages.inspect}"
-    end
-
-  end # describe #message
-
   describe "#messages" do
 
     subject { error.messages }
@@ -36,5 +26,16 @@ describe Assertion::InvalidError do
     end
 
   end # describe #message
+
+  describe "#inspect" do
+
+    subject { error.inspect }
+
+    it "returns a verbose string" do
+      expect(subject)
+        .to eql "<Assertion::InvalidError @messages=[\"foo\", \"bar\"]>"
+    end
+
+  end # describe #inspect
 
 end # describe Assertion::InvalidError

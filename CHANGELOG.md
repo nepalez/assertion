@@ -1,5 +1,9 @@
 ## Prepared for the next version
 
+### Added
+
+* Custom `Assertion::InvalidError#inspect` method that shows `#messages` (nepalez)
+
 ### Deleted
 
 * Removed `Assertion::NotImplementedError` (use `NoMethodError` instead) (nepalez)

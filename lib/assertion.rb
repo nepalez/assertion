@@ -5,8 +5,7 @@ require "transproc"
 require_relative "assertion/transprocs/inflector"
 require_relative "assertion/transprocs/list"
 
-require_relative "assertion/exceptions/invalid_error"
-
+require_relative "assertion/invalid_error"
 require_relative "assertion/attributes"
 require_relative "assertion/messages"
 

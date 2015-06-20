@@ -21,7 +21,6 @@ module Assertion
     # @private
     def initialize(*messages)
       @messages = messages.flatten.freeze
-      super
       freeze
     end
 
@@ -30,6 +29,11 @@ module Assertion
     # @return [Array<String>] The list of error messages
     #
     attr_reader :messages
+
+    # @private
+    def inspect
+      "<#{self} @messages=#{messages}>"
+    end
 
   end # class InvalidError
 
