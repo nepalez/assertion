@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = "~> 1.9"
 
-  gem.add_runtime_dependency "transproc", "~> 0.2"
+  gem.add_runtime_dependency "transproc", "~> 0.2", "> 0.2.3"
   gem.add_runtime_dependency "i18n", "~> 0.7"
 
   gem.add_development_dependency "hexx-rspec", "~> 0.4"
