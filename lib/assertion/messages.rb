@@ -19,9 +19,9 @@ module Assertion
   #
   #   item = MyClass.new
   #   item.message(true)
-  #   # => "translation missing: en.assertion.my_class.right"
+  #   # => "translation missing: en.assertion.my_class.truthy"
   #   item.message(false)
-  #   # => "translation missing: en.assertion.my_class.wrong"
+  #   # => "translation missing: en.assertion.my_class.falsey"
   #
   # @author Andrew Kozin <Andrew.Kozin@gmail.com>
   #
@@ -37,7 +37,7 @@ module Assertion
     #
     # @return [Hash<Object => Symbol>]
     #
-    DICTIONARY = { true => :right, false => :wrong }
+    DICTIONARY = { true => :truthy, false => :falsey }
 
     # Returns the message describing the desired state of assertion
     #

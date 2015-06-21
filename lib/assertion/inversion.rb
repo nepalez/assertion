@@ -5,7 +5,7 @@ module Assertion
   # Describes the inversion of the assertion object
   #
   # The inversion decorates the source assertion switching its message
-  # (from wrong to right) and reverting its `check`.
+  # (from falsey to truthy) and reverting its `check`.
   #
   # @example
   #   Adult = Assertion.about :name, :age do

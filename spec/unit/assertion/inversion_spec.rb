@@ -40,7 +40,7 @@ describe Assertion::Inversion do
 
     context "for the truthy state" do
 
-      it "is equal to wrong assertion" do
+      it "is equal to falsey assertion" do
         expect(inversion.message(true)).to eql assertion.message(false)
       end
 
@@ -52,7 +52,7 @@ describe Assertion::Inversion do
 
     context "for the falsey state" do
 
-      it "is equal to right assertion" do
+      it "is equal to truthy assertion" do
         expect(inversion.message(false)).to eql assertion.message(true)
       end
 

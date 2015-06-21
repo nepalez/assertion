@@ -22,8 +22,8 @@ describe Assertion::Messages, "#message" do
 
   context "without attributes" do
 
-    it_behaves_like "translating", true,  as: "right"
-    it_behaves_like "translating", false, as: "wrong"
+    it_behaves_like "translating", true,  as: "truthy"
+    it_behaves_like "translating", false, as: "falsey"
 
   end # context
 
@@ -31,8 +31,8 @@ describe Assertion::Messages, "#message" do
 
     before { test_klass.send(:define_method, :attributes) { { foo: :FOO } } }
 
-    it_behaves_like "translating", true,  as: "right"
-    it_behaves_like "translating", false, as: "wrong"
+    it_behaves_like "translating", true,  as: "truthy"
+    it_behaves_like "translating", false, as: "falsey"
 
   end # context
 

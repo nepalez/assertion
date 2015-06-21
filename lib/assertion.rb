@@ -23,20 +23,20 @@ require_relative "assertion/guard"
 #   # ---
 #   # en:
 #   #   assertion:
-#   #     adult:
-#   #       right: "%{name} is an adult (age %{age})"
-#   #       wrong: "%{name} is a child (age %{age})"
+#   #     is_adult:
+#   #       truthy: "%{name} is an adult (age %{age})"
+#   #       falsey: "%{name} is a child (age %{age})"
 #
-#   Adult = Assertion.about :name, :age do
+#   IsAdult = Assertion.about :name, :age do
 #     age >= 18
 #   end
 #
 #   joe = { name: 'Joe', age: 13 }
-#   Adult[joe].validate!
+#   IsAdult[joe].validate!
 #   # => #<Assertion::InvalidError @messages=["Joe is a child (age 13)"]>
 #
 #   jane = { name: 'Jane', age: 22 }
-#   Adult.not[jane].validate!
+#   IsAdult.not[jane].validate!
 #   # => #<Assertion::InvalidError @messages=["Jane is an adult (age 22)"]
 #
 # @api public

@@ -1,3 +1,11 @@
+## Prepared for v0.2.0
+
+### Changed
+
+* Renamed translation keys from `:right`/`:wrong` to `:truthy`/`:falsey` for consistency (nepalez)
+
+[Compare v0.1.0...HEAD](https://github.com/nepalez/assertion/compare/v0.1.0...HEAD)
+
 ## v0.1.0 2015-06-20
 
 ### Added

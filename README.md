@@ -49,7 +49,7 @@ IsAdult = Assertion.about :age, :name do
 end
 ```
 
-Define translations to describe both the *right* and *wrong* states of the assertion.
+Define translations to describe both the *truthy* and *falsey* states of the assertion.
 
 All the attributes are available in translations (that's why we declared the `name` as an attribute):
 
@@ -59,8 +59,8 @@ All the attributes are available in translations (that's why we declared the `na
 en:
   assertion:
     is_adult:
-      right: "%{name} is already an adult (age %{age})"
-      wrong: "%{name} is a child yet (age %{age})"
+      truthy: "%{name} is already an adult (age %{age})"
+      falsey: "%{name} is a child yet (age %{age})"
 ```
 
 Check a state of an assertion for some argument(s), using class method `[]`:
@@ -110,8 +110,8 @@ end
 en:
   assertion:
     is_male:
-      right: "%{name} is a male"
-      wrong: "%{name} is a female"
+      truthy: "%{name} is a male"
+      falsey: "%{name} is a female"
 ```
 
 Use method `&` (or its aliases `+` or `>>`) to compose assertion states:
