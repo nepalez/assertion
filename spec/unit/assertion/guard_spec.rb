@@ -32,20 +32,22 @@ describe Assertion::Guard do
 
     shared_examples "raising NameError" do |with: nil|
 
-      subject { AdultOnly.attribute with }
+      before  { Test = Class.new(described_class) } # #state not implemented yet
+      after   { Object.send :remove_const, :Test  }
+      subject { Test.attribute with               }
 
       it "fails" do
         expect { subject }.to raise_error do |error|
           expect(error).to be_kind_of NameError
-          expect(error.message).to eql "AdultOnly##{with} is already defined"
+          expect(error.message).to eql "Test##{with} is already defined"
         end
       end
 
     end # shared examples
 
     it_behaves_like "adding #object alias", :foo
-    it_behaves_like "raising NameError", with: :state
-    it_behaves_like "raising NameError", with: :call
+    it_behaves_like "raising NameError", with: "state"
+    it_behaves_like "raising NameError", with: "call"
 
   end # describe .attribute
 

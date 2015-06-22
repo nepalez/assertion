@@ -9,6 +9,7 @@ require_relative "assertion/state"
 require_relative "assertion/base"
 require_relative "assertion/inversion"
 require_relative "assertion/inverter"
+require_relative "assertion/guard_dsl"
 require_relative "assertion/guard"
 require_relative "assertion/dsl"
 
