@@ -1,4 +1,4 @@
-## Prepared for v0.2.0
+## v0.2.0 2015-06-22
 
 ### Changed (backward-incompatible!)
 
@@ -13,7 +13,7 @@
 * Class-level DSL features are extracted from `Assertion`, `Base` and `Guard`
   to the separate modules `DSL`, `BaseDSL`, `GuardDSL` correspondingly (nepalez)
 
-[Compare v0.1.0...HEAD](https://github.com/nepalez/assertion/compare/v0.1.0...HEAD)
+[Compare v0.1.0...v0.2.0](https://github.com/nepalez/assertion/compare/v0.1.0...v0.2.0)
 
 ## v0.1.0 2015-06-20
 
