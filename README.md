@@ -24,6 +24,8 @@ The primary goal of the gem is to make assertions about <decoupled> objects.
 
 No `ActiveSupport`, no mutation of any instances.
 
+[About](https://github.com/mbj/mutant/issues/356) 100% [mutant]-covered.
+
 ### Basic Usage
 
 Define an assertion by inheriting it from the `Assertion::Base` class with attributes to which it should be applied.
@@ -166,7 +168,7 @@ Naming Convention
 
 This is not necessary, but for verbosity you could follow the rules:
 
-* use the prefix `Is` for assertions (like `IsAdult`)
+* use the prefixex `Is` (`Are`) for assertions (like `IsAdult`, `AreConsistent` etc.)
 * use the suffix `Only` for guards (like `AdultOnly`)
 
 Edge Cases

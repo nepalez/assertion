@@ -2,9 +2,9 @@
 
 describe Assertion::Inversion do
 
-  before { Adult = Assertion.about(:age) { age >= 18 } }
+  before { IsAdult = Assertion.about(:age) { age >= 18 } }
 
-  let(:assertion)            { Adult.new age: 21              }
+  let(:assertion)            { IsAdult.new age: 21            }
   subject(:inversion)        { described_class.new(assertion) }
   subject(:double_inversion) { described_class.new(inversion) }
 
@@ -84,6 +84,6 @@ describe Assertion::Inversion do
 
   end # describe #call
 
-  after { Object.send :remove_const, :Adult }
+  after { Object.send :remove_const, :IsAdult }
 
 end # describe Assertion::Inversion

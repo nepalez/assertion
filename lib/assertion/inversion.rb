@@ -8,11 +8,11 @@ module Assertion
   # (from falsey to truthy) and reverting its `check`.
   #
   # @example
-  #   Adult = Assertion.about :name, :age do
+  #   IsAdult = Assertion.about :name, :age do
   #     age >= 18
   #   end
   #
-  #   assertion = Adult.new
+  #   assertion = IsAdult.new
   #   inversion = Inversion.new(assertion)
   #
   #   assertion.call.valid? == inversion.call.invalid? # => true

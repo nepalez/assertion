@@ -3,7 +3,7 @@
 describe Assertion::Inverter do
 
   let(:source) do
-    Man = Assertion.about(:age, :gender) { age.to_i >= 18 && gender == :male }
+    IsMan = Assertion.about(:age, :gender) { age.to_i >= 18 && gender == :male }
   end
 
   subject(:inverter) { described_class.new source }
@@ -75,6 +75,6 @@ describe Assertion::Inverter do
 
   end # describe #[]
 
-  after { Object.send :remove_const, :Man }
+  after { Object.send :remove_const, :IsMan }
 
 end # describe Assertion::Inverter

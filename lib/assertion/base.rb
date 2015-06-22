@@ -19,7 +19,7 @@ module Assertion
   # * [.not] can be used to provide the assertion opposite to the initial one.
   #
   # @example
-  #   class Adult < Assertion::Base
+  #   class IsAdult < Assertion::Base
   #     attribute :name, :age
   #
   #     def check
@@ -27,10 +27,10 @@ module Assertion
   #     end
   #   end
   #
-  #   child = Adult.not
+  #   child = IsAdult.not
   #
   #   jane = { name: "Jane", age: 12 }
-  #   Adult[jane].valid? # => false
+  #   IsAdult[jane].valid? # => false
   #   child[jane].valid? # => true
   #
   class Base
@@ -48,11 +48,11 @@ module Assertion
     # @!attribute [r] attributes
     #
     # @example
-    #   Adult = Assertion.about :name, :age do
+    #   IsAdult = Assertion.about :name, :age do
     #     age >= 18
     #   end
     #
-    #   adult = Adult[name: "Joe", age: 15, gender: :male]
+    #   adult = IsAdult[name: "Joe", age: 15, gender: :male]
     #   adult.attributes # => { name: "Joe", age: 15 }
     #
     # @return [Hash]

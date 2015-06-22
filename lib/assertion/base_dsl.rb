@@ -22,14 +22,14 @@ module Assertion
     # just the opposite statement to the current one
     #
     # @example
-    #   Adult = Assertion.about :name, :age do
+    #   IsAdult = Assertion.about :name, :age do
     #     age >= 18
     #   end
     #
     #   joe = { name: 'Joe', age: 19 }
     #
-    #   Adult[joe].valid?     # => true
-    #   Adult.not[joe].valid? # => false
+    #   IsAdult[joe].valid?     # => true
+    #   IsAdult.not[joe].valid? # => false
     #
     # @return [Assertion::Inverter]
     #

@@ -5,13 +5,13 @@ module Assertion
   # Builds inversions for instances of some `Assertion::Base` subclass
   #
   # @example
-  #   Adult = Assertion.about :name, :age do
+  #   IsAdult = Assertion.about :name, :age do
   #     age >= 18
   #   end
   #
   #   joe = OpenStruct.new(name: "Joe", age: 40)
   #
-  #   child = Inverter.new(Adult)
+  #   child = Inverter.new(IsAdult)
   #   child[name: "Joe"].validate!
   #   # => #<Assertion::InvalidError @messages=["Joe is an adult (age 40)"]>
   #
