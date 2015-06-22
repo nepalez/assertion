@@ -10,6 +10,8 @@
   instead of the initializations (addresses efficiency issue #1) (nepalez)
 * `Translator` replaced `Messages` and `List`(transproc) to invert dependency
   of `Base` from translations. (nepalez)
+* Class-level DSL features are extracted from `Assertion`, `Base` and `Guard`
+  to the separate modules `DSL`, `BaseDSL`, `GuardDSL` correspondingly (nepalez)
 
 [Compare v0.1.0...HEAD](https://github.com/nepalez/assertion/compare/v0.1.0...HEAD)
 
