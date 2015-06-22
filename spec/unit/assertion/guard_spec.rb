@@ -6,32 +6,54 @@ describe Assertion::Guard do
 
   before do
     IsAdult   = Assertion.about(:age) { age.to_i >= 18 }
-    AdultOnly = Class.new(described_class) { def state; IsAdult[object]; end }
+    AdultOnly = Class.new(described_class) do
+      def state
+        IsAdult[object.to_h]
+      end
+    end
   end
 
   let(:valid)   { OpenStruct.new(name: "Joe", age: 40) }
   let(:invalid) { OpenStruct.new(name: "Ian", age: 10) }
-  let(:guard)   { AdultOnly.new valid     }
+  let(:guard)   { AdultOnly.new valid }
 
-  it "can declare attributes" do
-    expect(AdultOnly).to be_kind_of Assertion::Attributes
-  end
+  describe ".attribute" do
+
+    shared_examples "adding #object alias" do |name|
+
+      subject { AdultOnly.attribute name }
+
+      it "adds alias for the #object" do
+        subject
+        expect(guard.send name).to eql guard.object
+      end
+
+    end # shared examples
+
+    shared_examples "raising NameError" do |with: nil|
+
+      subject { AdultOnly.attribute with }
+
+      it "fails" do
+        expect { subject }.to raise_error do |error|
+          expect(error).to be_kind_of NameError
+          expect(error.message).to eql "AdultOnly##{with} is already defined"
+        end
+      end
+
+    end # shared examples
+
+    it_behaves_like "adding #object alias", :foo
+    it_behaves_like "raising NameError", with: :state
+    it_behaves_like "raising NameError", with: :call
+
+  end # describe .attribute
 
   describe ".new" do
 
     subject { guard }
 
     it { is_expected.to be_frozen }
-
-    context "with an attriubute" do
-
-      before { allow(AdultOnly).to receive(:attributes) { [:foo] } }
-
-      it "adds the alias to the #object" do
-        expect(subject.foo).to eql subject.object
-      end
-
-    end # context
 
   end # describe .new
 

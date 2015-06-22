@@ -4,6 +4,11 @@
 
 * Renamed translation keys from `:right`/`:wrong` to `:truthy`/`:falsey` for consistency (nepalez)
 
+### Internal
+
+* Attributes are added to `Base` and `Guard` at the moment of definition,
+  instead of the initializations (addresses efficiency issue #1) (nepalez)
+
 [Compare v0.1.0...HEAD](https://github.com/nepalez/assertion/compare/v0.1.0...HEAD)
 
 ## v0.1.0 2015-06-20

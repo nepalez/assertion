@@ -13,7 +13,7 @@ describe Assertion do
     end
 
     AdultOnly = Assertion.guards :user do
-      IsAdult[user]
+      IsAdult[user.to_h]
     end
 
     andrew = OpenStruct.new(name: "Andrew", age: 13, city: "Moscow")

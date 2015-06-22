@@ -4,8 +4,8 @@ require "i18n"
 
 module Assertion
 
-  # Module Messages provides a feature for gem-specific translation of messages
-  # describing the desired state of the assertion
+  # Module defines how to translate messages describing the desired state
+  # of the current assertion
   #
   # You need to declare a hash of attributes to be added to the translation.
   #

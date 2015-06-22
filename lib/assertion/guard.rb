@@ -32,8 +32,6 @@ module Assertion
   #
   class Guard
 
-    extend Attributes
-
     class << self
 
       # Initializes and guard for the provided object and calls it immediately
@@ -48,10 +46,22 @@ module Assertion
         new(object).call
       end
 
+      # Adds alias to the [#object] method
+      #
+      # @param [#to_sym] name
+      #
+      # @return [undefined]
+      #
+      def attribute(name)
+        __check_attribute__(name)
+        alias_method name, :object
+      end
+
       private
 
-      def __forbidden_attributes__
-        [:state]
+      def __check_attribute__(key)
+        return unless (instance_methods << :state).include? key.to_sym
+        fail NameError.new "#{self}##{key} is already defined"
       end
 
     end # eigenclass
@@ -73,7 +83,6 @@ module Assertion
     # @private
     def initialize(object)
       @object = object
-      self.class.attributes.each(&method(:__set_attribute__))
       freeze
     end
 
@@ -86,12 +95,6 @@ module Assertion
     def call
       state.validate!
       object
-    end
-
-    private
-
-    def __set_attribute__(name)
-      singleton_class.instance_eval { alias_method name, :object }
     end
 
   end # class Guard
