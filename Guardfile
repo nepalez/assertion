@@ -4,15 +4,15 @@ guard :rspec, cmd: "bundle exec rspec" do
 
   watch(%r{^spec/.+_spec\.rb$})
 
-  watch(%r{^lib/assertion/(.+)\.rb}) do |m|
-    "spec/unit/assertion/#{m[1]}_spec.rb"
+  watch(%r{^lib/(.+)\.rb}) do |m|
+    "spec/unit/#{m[1]}_spec.rb"
   end
 
-  watch(%r{^lib/assertion/transproc.rb}) do
-    "spec/unit/assertion/transproc"
-  end
+  watch("lib/assertion/dsl.rb")       { "spec/unit/assertion_spec.rb"       }
+  watch("lib/assertion/base_dsl.rb")  { "spec/unit/assertion/base_spec.rb"  }
+  watch("lib/assertion/guard_dsl.rb") { "spec/unit/assertion/guard_spec.rb" }
+  watch("lib/assertion/inflector.rb") { "spec/unit/assertion/inflector"     }
 
-  watch("lib/assertion.rb")        { "spec" }
   watch("spec/spec_helper.rb") { "spec" }
 
 end # guard :rspec
