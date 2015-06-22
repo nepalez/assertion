@@ -4,7 +4,7 @@ require "transproc"
 
 require_relative "assertion/inflector"
 require_relative "assertion/invalid_error"
-require_relative "assertion/messages"
+require_relative "assertion/translator"
 require_relative "assertion/state"
 require_relative "assertion/base"
 require_relative "assertion/inversion"

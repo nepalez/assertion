@@ -107,7 +107,13 @@ module Assertion
 
     end # eigenclass
 
-    include Messages
+    # The translator of states for the current class
+    #
+    # @return [Assertion::Translator]
+    #
+    def self.translator
+      @translator ||= Translator.new(self)
+    end
 
     # @!attribute [r] attributes
     #
@@ -129,6 +135,16 @@ module Assertion
       keys = self.class.attributes
       @attributes = Hash[keys.zip(args.values_at(*keys))]
       freeze
+    end
+
+    # Returns the message describing the current state
+    #
+    # @param [Boolean] state The state to describe
+    #
+    # @return [String]
+    #
+    def message(state)
+      self.class.translator.call(state, attributes)
     end
 
     # Calls the assertion checkup and returns the state of the assertion having

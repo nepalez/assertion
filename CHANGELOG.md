@@ -1,6 +1,6 @@
 ## Prepared for v0.2.0
 
-### Changed
+### Changed (backward-incompatible!)
 
 * Renamed translation keys from `:right`/`:wrong` to `:truthy`/`:falsey` for consistency (nepalez)
 
@@ -8,6 +8,8 @@
 
 * Attributes are added to `Base` and `Guard` at the moment of definition,
   instead of the initializations (addresses efficiency issue #1) (nepalez)
+* `Translator` replaced `Messages` and `List`(transproc) to invert dependency
+  of `Base` from translations. (nepalez)
 
 [Compare v0.1.0...HEAD](https://github.com/nepalez/assertion/compare/v0.1.0...HEAD)
 

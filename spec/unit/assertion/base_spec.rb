@@ -5,10 +5,6 @@ describe Assertion::Base do
   let(:klass) { Class.new(described_class) }
   before { allow(klass).to receive(:name) { "Test" } }
 
-  it "can translate states" do
-    expect(klass).to include Assertion::Messages
-  end
-
   describe ".new" do
 
     let(:klass) { Class.new(described_class) { attribute :foo, :bar } }
@@ -130,19 +126,45 @@ describe Assertion::Base do
 
   describe ".[]" do
 
-    subject { klass[params] }
-
     let(:params)    { { foo: :FOO }      }
     let(:state)     { double             }
     let(:assertion) { double call: state }
 
-    before { allow(klass).to receive(:new).with(params) { assertion } }
+    context "with params" do
 
-    it "checks the assertion for given attributes" do
-      expect(subject).to eql state
-    end
+      subject { klass[params] }
+
+      it "checks the assertion for given attributes" do
+        allow(klass).to receive(:new).with(params) { assertion }
+        expect(subject).to eql state
+      end
+
+    end # context
+
+    context "without params" do
+
+      subject { klass[] }
+
+      it "checks the assertion" do
+        allow(klass).to receive(:new) { assertion }
+        expect(subject).to eql state
+      end
+
+    end # context
 
   end # describe .[]
+
+  describe ".translator" do
+
+    subject { klass.translator }
+
+    it { is_expected.to be_kind_of Assertion::Translator }
+
+    it "refers to the current class" do
+      expect(subject.assertion).to eql klass
+    end
+
+  end # describe .translator
 
   describe "#attributes" do
 
@@ -154,6 +176,22 @@ describe Assertion::Base do
     it      { is_expected.to eql attrs }
 
   end # describe #attributes
+
+  describe "#message" do
+
+    let(:state)      { double }
+    let(:attrs)      { { foo: :FOO, bar: :BAR } }
+    let(:klass)      { Class.new(described_class) { attribute :foo, :bar } }
+    let(:assertion)  { klass.new attrs }
+    let(:translator) { double call: nil }
+
+    it "calls a translator with state and attributes" do
+      allow(klass).to receive(:translator) { translator }
+      expect(translator).to receive(:call).with(state, attrs)
+      assertion.message(state)
+    end
+
+  end # describe #message
 
   describe "#call" do
 
