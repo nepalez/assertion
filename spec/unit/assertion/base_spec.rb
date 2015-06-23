@@ -5,6 +5,10 @@ describe Assertion::Base do
   let(:klass) { Class.new(described_class) }
   before { allow(klass).to receive(:name) { "Test" } }
 
+  it "implements DSL::Caller" do
+    expect(klass).to be_kind_of Assertion::DSL::Caller
+  end
+
   describe ".new" do
 
     let(:klass) { Class.new(described_class) { attribute :foo, :bar } }
@@ -123,36 +127,6 @@ describe Assertion::Base do
     end
 
   end # describe .not
-
-  describe ".[]" do
-
-    let(:params)    { { foo: :FOO }      }
-    let(:state)     { double             }
-    let(:assertion) { double call: state }
-
-    context "with params" do
-
-      subject { klass[params] }
-
-      it "checks the assertion for given attributes" do
-        allow(klass).to receive(:new).with(params) { assertion }
-        expect(subject).to eql state
-      end
-
-    end # context
-
-    context "without params" do
-
-      subject { klass[] }
-
-      it "checks the assertion" do
-        allow(klass).to receive(:new) { assertion }
-        expect(subject).to eql state
-      end
-
-    end # context
-
-  end # describe .[]
 
   describe ".translator" do
 

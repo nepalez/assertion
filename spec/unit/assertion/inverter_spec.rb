@@ -8,6 +8,10 @@ describe Assertion::Inverter do
 
   subject(:inverter) { described_class.new source }
 
+  it "implements DSL::Caller" do
+    expect(inverter).to be_kind_of Assertion::DSL::Caller
+  end
+
   describe ".new" do
 
     it { is_expected.to be_frozen }
@@ -48,32 +52,6 @@ describe Assertion::Inverter do
     end # context
 
   end # describe #new
-
-  describe "#[]" do
-
-    context "with attributes" do
-
-      subject(:state) { inverter[age: 18, gender: :male] }
-
-      it "provides the state for inversion" do
-        expect(state).to be_kind_of Assertion::State
-        expect(state).to be_invalid
-      end
-
-    end # context
-
-    context "without attributes" do
-
-      subject(:state) { inverter[] }
-
-      it "provides the state for inversion" do
-        expect(state).to be_kind_of Assertion::State
-        expect(state).to be_valid
-      end
-
-    end # context
-
-  end # describe #[]
 
   after { Object.send :remove_const, :IsMan }
 

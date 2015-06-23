@@ -17,6 +17,8 @@ module Assertion
   #
   class Inverter
 
+    include DSL::Caller
+
     # @!attribute [r] source
     #
     # @return [Class] The `Assertion::Base` sublcass to build negators for
@@ -45,16 +47,6 @@ module Assertion
     #
     def new(hash = {})
       Inversion.new source.new(hash)
-    end
-
-    # Initializes an assertion, builds its inversion, and applies it to the data
-    #
-    # @param (see #new)
-    #
-    # @return (see Assertion::Base#call)
-    #
-    def [](hash = {})
-      new(hash).call
     end
 
   end # class Inverter

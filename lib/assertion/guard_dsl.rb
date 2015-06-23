@@ -4,17 +4,7 @@ module Assertion
   #
   module GuardDSL
 
-    # Initializes and guard for the provided object and calls it immediately
-    #
-    # @param [Object] object The object whose state should be tested
-    #
-    # @return (see Assertion::Guard#call)
-    #
-    # @raise (see Assertion::Guard#call)
-    #
-    def [](object)
-      new(object).call
-    end
+    include DSL::Caller
 
     # Adds alias to the [#object] method
     #

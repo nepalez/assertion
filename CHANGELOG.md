@@ -4,6 +4,10 @@
 
 * Support any values returned by `Base#check` method, not only boolean ones (nepalez)
 
+### Internal
+
+* `[]` caller method is extracted from `BaseDSL`, `Inverter`, and `GuardDSL` to `DSL::Caller` (nepalez)
+
 [Compare v0.2.0...HEAD](https://github.com/nepalez/assertion/compare/v0.2.0...HEAD)
 
 ## v0.2.0 2015-06-22

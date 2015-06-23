@@ -17,6 +17,10 @@ describe Assertion::Guard do
   let(:invalid) { OpenStruct.new(name: "Ian", age: 10) }
   let(:guard)   { AdultOnly.new valid }
 
+  it "implements DSL::Caller" do
+    expect(AdultOnly).to be_kind_of Assertion::DSL::Caller
+  end
+
   describe ".attribute" do
 
     shared_examples "adding #object alias" do |name|
@@ -55,26 +59,13 @@ describe Assertion::Guard do
 
     subject { guard }
 
+    it "initializes the object" do
+      expect(guard.object).to eql valid
+    end
+
     it { is_expected.to be_frozen }
 
   end # describe .new
-
-  describe ".[]" do
-
-    it "returns the result of the call" do
-      expect(AdultOnly[valid]).to eql valid
-      expect { AdultOnly[invalid] }.to raise_error Assertion::InvalidError
-    end
-
-  end # describe .[]
-
-  describe "#object" do
-
-    subject { guard.object }
-
-    it { is_expected.to eql valid }
-
-  end # describe #object
 
   describe "#call" do
 

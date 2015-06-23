@@ -6,15 +6,7 @@ module Assertion
   #
   module BaseDSL
 
-    # Initializes an assertion with some attributes (data) and then calls it
-    #
-    # @param (see Assertion::Base.new)
-    #
-    # @return (see Assertion::Base#call)
-    #
-    def [](args = nil)
-      new(args).call
-    end
+    include DSL::Caller
 
     # Initializes the intermediate inverter with `new` and `[]` methods
     #
