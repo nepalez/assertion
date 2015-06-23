@@ -9,6 +9,7 @@ require_relative "assertion/dsl/caller"
 require_relative "assertion/dsl/attribute"
 require_relative "assertion/dsl/attributes"
 require_relative "assertion/dsl/inversion"
+require_relative "assertion/dsl/builder"
 
 require_relative "assertion/translator"
 require_relative "assertion/state"
@@ -16,7 +17,6 @@ require_relative "assertion/base"
 require_relative "assertion/inversion"
 require_relative "assertion/inverter"
 require_relative "assertion/guard"
-require_relative "assertion/dsl"
 
 # The module declares:
 #
@@ -58,6 +58,6 @@ require_relative "assertion/dsl"
 #
 module Assertion
 
-  extend DSL
+  extend DSL::Builder
 
 end # module Assertion

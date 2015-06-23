@@ -2,6 +2,8 @@
 
 module Assertion
 
+  # Collection of DSLs for various modules and classes
+  #
   module DSL
 
     # Allows adding aliases to `#object` method.
