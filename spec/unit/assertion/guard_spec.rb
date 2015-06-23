@@ -21,39 +21,9 @@ describe Assertion::Guard do
     expect(AdultOnly).to be_kind_of Assertion::DSL::Caller
   end
 
-  describe ".attribute" do
-
-    shared_examples "adding #object alias" do |name|
-
-      subject { AdultOnly.attribute name }
-
-      it "adds alias for the #object" do
-        subject
-        expect(guard.send name).to eql guard.object
-      end
-
-    end # shared examples
-
-    shared_examples "raising NameError" do |with: nil|
-
-      before  { Test = Class.new(described_class) } # #state not implemented yet
-      after   { Object.send :remove_const, :Test  }
-      subject { Test.attribute with               }
-
-      it "fails" do
-        expect { subject }.to raise_error do |error|
-          expect(error).to be_kind_of NameError
-          expect(error.message).to eql "Test##{with} is already defined"
-        end
-      end
-
-    end # shared examples
-
-    it_behaves_like "adding #object alias", :foo
-    it_behaves_like "raising NameError", with: "state"
-    it_behaves_like "raising NameError", with: "call"
-
-  end # describe .attribute
+  it "implements DSL::Attribute" do
+    expect(AdultOnly).to be_kind_of Assertion::DSL::Attribute
+  end
 
   describe ".new" do
 

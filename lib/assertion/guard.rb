@@ -32,7 +32,8 @@ module Assertion
   #
   class Guard
 
-    extend GuardDSL
+    extend DSL::Attribute
+    extend DSL::Caller
 
     # @!scope class
     # @!method new(object)
