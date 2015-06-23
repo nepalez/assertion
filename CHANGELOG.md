@@ -9,6 +9,7 @@
 * `[]` caller method is extracted from `BaseDSL`, `Inverter`, and `GuardDSL` to `DSL::Caller` (nepalez)
 * `GuardDSL` is splitted to `DSL::Caller` and `DSL::Attribute` (nepalez)
 * `.attribute`, `.attributes` and `#attributes` extracted from `BaseDSL` to `DSL::Attributes` (nepalez)
+* `BaseDSL` is splitted to `DSL::Attributes`, `DSL::Caller` and `DSL::Inversion` (nepalez)
 
 [Compare v0.2.0...HEAD](https://github.com/nepalez/assertion/compare/v0.2.0...HEAD)
 

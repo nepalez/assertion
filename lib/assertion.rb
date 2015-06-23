@@ -4,12 +4,14 @@ require "transproc"
 
 require_relative "assertion/inflector"
 require_relative "assertion/invalid_error"
-require_relative "assertion/translator"
-require_relative "assertion/state"
+
 require_relative "assertion/dsl/caller"
 require_relative "assertion/dsl/attribute"
 require_relative "assertion/dsl/attributes"
-require_relative "assertion/base_dsl"
+require_relative "assertion/dsl/inversion"
+
+require_relative "assertion/translator"
+require_relative "assertion/state"
 require_relative "assertion/base"
 require_relative "assertion/inversion"
 require_relative "assertion/inverter"

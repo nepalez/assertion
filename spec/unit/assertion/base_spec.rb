@@ -13,6 +13,22 @@ describe Assertion::Base do
     expect(klass).to be_kind_of Assertion::DSL::Attributes
   end
 
+  it "implements DSL::Inversion" do
+    expect(klass).to be_kind_of Assertion::DSL::Inversion
+  end
+
+  describe ".translator" do
+
+    subject { klass.translator }
+
+    it { is_expected.to be_kind_of Assertion::Translator }
+
+    it "refers to the current class" do
+      expect(subject.assertion).to eql klass
+    end
+
+  end # describe .translator
+
   describe ".new" do
 
     let(:klass) { Class.new(described_class) { attribute :foo, :bar } }
@@ -44,17 +60,6 @@ describe Assertion::Base do
     end # context
 
   end # describe .new
-
-  describe ".not" do
-
-    subject { klass.not }
-
-    it "creates the iverter for the current class" do
-      expect(subject).to be_kind_of Assertion::Inverter
-      expect(subject.source).to eql klass
-    end
-
-  end # describe .not
 
   describe ".translator" do
 

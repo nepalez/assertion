@@ -35,7 +35,9 @@ module Assertion
   #
   class Base
 
-    extend BaseDSL
+    extend DSL::Attributes
+    extend DSL::Inversion
+    extend DSL::Caller
 
     # The translator of states for the current class
     #
