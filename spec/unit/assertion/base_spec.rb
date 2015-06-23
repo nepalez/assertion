@@ -17,18 +17,6 @@ describe Assertion::Base do
     expect(klass).to be_kind_of Assertion::DSL::Inversion
   end
 
-  describe ".translator" do
-
-    subject { klass.translator }
-
-    it { is_expected.to be_kind_of Assertion::Translator }
-
-    it "refers to the current class" do
-      expect(subject.assertion).to eql klass
-    end
-
-  end # describe .translator
-
   describe ".new" do
 
     let(:klass) { Class.new(described_class) { attribute :foo, :bar } }
@@ -61,47 +49,40 @@ describe Assertion::Base do
 
   end # describe .new
 
-  describe ".translator" do
-
-    subject { klass.translator }
-
-    it { is_expected.to be_kind_of Assertion::Translator }
-
-    it "refers to the current class" do
-      expect(subject.assertion).to eql klass
-    end
-
-  end # describe .translator
-
   describe "#message" do
 
-    let(:attrs)      { { foo: :FOO, bar: :BAR } }
-    let(:klass)      { Class.new(described_class) { attribute :foo, :bar } }
-    let(:assertion)  { klass.new attrs }
-    let(:translator) { double call: nil }
+    let(:klass)      { Class.new(described_class) { attribute :foo } }
+    let(:assertion)  { klass.new(foo: :FOO)                          }
 
-    context "with a state" do
+    shared_examples "translating" do |as: nil|
 
-      let(:state) { double }
-      after { assertion.message(state) }
+      let(:translator) { Assertion::Translator.new(klass) }
+      let(:attributes) { assertion.attributes             }
 
-      it "calls a translator with state and attributes" do
-        allow(klass).to receive(:translator) { translator }
-        expect(translator).to receive(:call).with(state, attrs)
+      it "uses attributes in a translation" do
+        expect(I18n).to receive :translate do |_, args|
+          expect(args.merge(attributes)).to eql args
+        end
+        subject
       end
 
-    end # context
-
-    context "without a state" do
-
-      after { assertion.message }
-
-      it "calls a translator with nil" do
-        allow(klass).to receive(:translator) { translator }
-        expect(translator).to receive(:call).with(nil, attrs)
+      it "returns a translation" do
+        expect(subject).to eql translator.call(as, attributes)
       end
 
-    end # context
+    end # shared examples
+
+    it_behaves_like "translating", as: true do
+      subject { assertion.message(true) }
+    end
+
+    it_behaves_like "translating", as: false do
+      subject { assertion.message(false) }
+    end
+
+    it_behaves_like "translating", as: false do
+      subject { assertion.message }
+    end
 
   end # describe #message
 
