@@ -81,7 +81,7 @@ module Assertion
     #
     # @return [String]
     #
-    def message(state)
+    def message(state = nil)
       self.class.translator.call(state, attributes)
     end
 
@@ -94,7 +94,7 @@ module Assertion
     #   The state of the assertion being applied to its attributes
     #
     def call
-      State.new check, message(false)
+      State.new check, message
     end
 
   end # class Base

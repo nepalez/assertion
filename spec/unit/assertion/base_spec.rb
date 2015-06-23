@@ -179,17 +179,33 @@ describe Assertion::Base do
 
   describe "#message" do
 
-    let(:state)      { double }
     let(:attrs)      { { foo: :FOO, bar: :BAR } }
     let(:klass)      { Class.new(described_class) { attribute :foo, :bar } }
     let(:assertion)  { klass.new attrs }
     let(:translator) { double call: nil }
 
-    it "calls a translator with state and attributes" do
-      allow(klass).to receive(:translator) { translator }
-      expect(translator).to receive(:call).with(state, attrs)
-      assertion.message(state)
-    end
+    context "with a state" do
+
+      let(:state) { double }
+      after { assertion.message(state) }
+
+      it "calls a translator with state and attributes" do
+        allow(klass).to receive(:translator) { translator }
+        expect(translator).to receive(:call).with(state, attrs)
+      end
+
+    end # context
+
+    context "without a state" do
+
+      after { assertion.message }
+
+      it "calls a translator with nil" do
+        allow(klass).to receive(:translator) { translator }
+        expect(translator).to receive(:call).with(nil, attrs)
+      end
+
+    end # context
 
   end # describe #message
 

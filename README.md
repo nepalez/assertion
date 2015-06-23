@@ -29,7 +29,7 @@ No `ActiveSupport`, no mutation of any instances.
 ### Basic Usage
 
 Define an assertion by inheriting it from the `Assertion::Base` class with attributes to which it should be applied.
-Then implement the method `check` that should return a boolean value.
+Then implement the method `check` to describe if the assertion is truthy or falsey.
 
 You can do it either in the classic style:
 

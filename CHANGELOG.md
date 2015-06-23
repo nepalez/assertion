@@ -1,3 +1,11 @@
+## Prepared for v0.2.1
+
+### Bugs Fixed
+
+* Support any values returned by `Base#check` method, not only boolean ones (nepalez)
+
+[Compare v0.2.0...HEAD](https://github.com/nepalez/assertion/compare/v0.2.0...HEAD)
+
 ## v0.2.0 2015-06-22
 
 ### Changed (backward-incompatible!)

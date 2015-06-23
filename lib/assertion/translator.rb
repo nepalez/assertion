@@ -87,7 +87,7 @@ module Assertion
     # @return [String] The translation
     #
     def call(state, args = {})
-      I18n.translate DICTIONARY[state], args.merge(scope: scope)
+      I18n.translate DICTIONARY[state ? true : false], args.merge(scope: scope)
     end
 
   end # class Translator
