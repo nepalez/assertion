@@ -174,14 +174,15 @@ This is not necessary, but for verbosity you could follow the rules:
 Edge Cases
 ----------
 
-You cannot define attributes with names already defined as istance methods:
+You cannot define attributes with names already defined as istance methods,
+or reserved by `Base#check` and `Guard#state`:
 
 ```ruby
 IsAdult = Assertion.about :check
-# => #<Assertion::NameError @message="Wrong name(s) for attribute(s): check">
+# => #<Assertion::NameError @message="IsAdult#check is already defined">
 
 AdultOnly = Assertion.guards :state
-# => #<Assertion::NameError @message="Wrong name(s) for attribute(s): state">
+# => #<Assertion::NameError @message="AdultOnly#state is already defined">
 ```
 
 Installation
