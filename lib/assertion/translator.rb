@@ -46,7 +46,7 @@ module Assertion
     # @return [Array<Symbol>]
     #
     def self.scope(klass)
-      [ROOT, Inflector[:to_snake_path][klass.name].to_sym]
+      [ROOT, Inflecto.underscore(klass).to_sym]
     end
 
     # @!attribute [r] scope
