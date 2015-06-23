@@ -1,4 +1,4 @@
-## Prepared for v0.2.1
+## v0.2.1 2015-06-23
 
 ### Bugs Fixed
 
@@ -12,7 +12,7 @@
 * `BaseDSL` is splitted to `DSL::Attributes`, `DSL::Caller` and `DSL::Inversion` (nepalez)
 * `DSL` is renamed to `DSL::Builder` to follow the convention. `DSL` is reserved for collection of DSLs (nepalez)
 
-[Compare v0.2.0...HEAD](https://github.com/nepalez/assertion/compare/v0.2.0...HEAD)
+[Compare v0.2.0...v0.2.1](https://github.com/nepalez/assertion/compare/v0.2.0...v0.2.1)
 
 ## v0.2.0 2015-06-22
 
