@@ -7,6 +7,7 @@ module Assertion
   module BaseDSL
 
     include DSL::Caller
+    include DSL::Attributes
 
     # Initializes the intermediate inverter with `new` and `[]` methods
     #
@@ -27,39 +28,6 @@ module Assertion
     #
     def not
       Inverter.new(self)
-    end
-
-    # List of attributes defined for the assertion
-    #
-    # @return [Array<Symbol>]
-    #
-    def attributes
-      @attributes ||= []
-    end
-
-    # Declares new attribute(s) by name(s)
-    #
-    # @param [#to_sym, Array<#to_sym>] names
-    #
-    # @return [undefined]
-    #
-    # @raise [NameError]
-    #   When an instance method with one of given names is already exist.
-    #
-    def attribute(*names)
-      names.flatten.map(&:to_sym).each(&method(:__add_attribute__))
-    end
-
-    private
-
-    def __add_attribute__(name)
-      __check_attribute__(name)
-      attributes << define_method(name) { attributes[name] }
-    end
-
-    def __check_attribute__(name)
-      return unless (instance_methods << :check).include? name
-      fail NameError.new "#{self}##{name} is already defined"
     end
 
   end # module BaseDSL

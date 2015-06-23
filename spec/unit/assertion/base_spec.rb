@@ -9,6 +9,10 @@ describe Assertion::Base do
     expect(klass).to be_kind_of Assertion::DSL::Caller
   end
 
+  it "implements DSL::Attributes" do
+    expect(klass).to be_kind_of Assertion::DSL::Attributes
+  end
+
   describe ".new" do
 
     let(:klass) { Class.new(described_class) { attribute :foo, :bar } }
@@ -41,82 +45,6 @@ describe Assertion::Base do
 
   end # describe .new
 
-  describe ".attributes" do
-
-    subject { klass.attributes }
-    it { is_expected.to eql [] }
-
-  end # describe .attributes
-
-  describe ".attribute" do
-
-    shared_examples "defining attributes" do
-
-      it "registers attributes" do
-        expect { subject }.to change { klass.attributes }.to [:foo, :bar]
-      end
-
-      it "declares attributes" do
-        subject
-        assertion = klass.new(foo: :FOO, bar: :BAR, baz: :BAZ)
-        expect(assertion.attributes).to eql(foo: :FOO, bar: :BAR)
-        expect(assertion.foo).to eql :FOO
-        expect(assertion.bar).to eql :BAR
-      end
-
-    end # shared examples
-
-    shared_examples "raising NameError" do |with: nil|
-
-      it "fails" do
-        expect { subject }.to raise_error do |exception|
-          expect(exception).to be_kind_of NameError
-          expect(exception.message).to eql "#{klass}##{with} is already defined"
-        end
-      end
-
-    end # shared examples
-
-    context "with a single name" do
-
-      subject do
-        klass.attribute :foo
-        klass.attribute "bar"
-      end
-      it_behaves_like "defining attributes"
-
-    end # context
-
-    context "with a list of names" do
-
-      subject { klass.attribute :foo, :bar }
-      it_behaves_like "defining attributes"
-
-    end # context
-
-    context "with an array of names" do
-
-      subject { klass.attribute %w(foo bar) }
-      it_behaves_like "defining attributes"
-
-    end # context
-
-    context ":check" do
-
-      subject { klass.attribute :check }
-      it_behaves_like "raising NameError", with: :check
-
-    end # context
-
-    context ":call" do
-
-      subject { klass.attribute :call }
-      it_behaves_like "raising NameError", with: :call
-
-    end # context
-
-  end # describe .attribute
-
   describe ".not" do
 
     subject { klass.not }
@@ -139,17 +67,6 @@ describe Assertion::Base do
     end
 
   end # describe .translator
-
-  describe "#attributes" do
-
-    let(:attrs)     { { foo: :FOO, bar: :BAR } }
-    let(:klass)     { Class.new(described_class) { attribute :foo, :bar } }
-    let(:assertion) { klass.new attrs }
-
-    subject { assertion.attributes     }
-    it      { is_expected.to eql attrs }
-
-  end # describe #attributes
 
   describe "#message" do
 
