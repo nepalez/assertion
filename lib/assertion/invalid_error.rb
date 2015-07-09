@@ -20,8 +20,8 @@ module Assertion
 
     # @private
     def initialize(*messages)
-      @messages = messages.flatten.freeze
-      freeze
+      @messages = messages.flatten
+      IceNine.deep_freeze(self)
     end
 
     # @!attribute [r] messages

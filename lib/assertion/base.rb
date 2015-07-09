@@ -74,7 +74,7 @@ module Assertion
     def initialize(args = {})
       keys = self.class.attributes
       @attributes = Hash[keys.zip(args.values_at(*keys))]
-      freeze
+      IceNine.deep_freeze(self)
     end
 
     # Returns the message describing the current state

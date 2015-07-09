@@ -36,7 +36,7 @@ module Assertion
     # @private
     def initialize(source)
       @source = source
-      freeze
+      IceNine.deep_freeze(self)
     end
 
     # Initializes a [#source] object and builds a negator for it

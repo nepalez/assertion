@@ -46,7 +46,7 @@ module Assertion
     # @private
     def initialize(object)
       @object = object
-      freeze
+      IceNine.deep_freeze(self)
     end
 
     # Validates the state of the [#object] and returns valid object back

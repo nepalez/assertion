@@ -1,3 +1,11 @@
+## Prepared for the next version
+
+### Internal
+
+* Switched to `ice_nine` gem to freezing objects deeply (nepalez)
+
+[Compare v0.2.1...HEAD](https://github.com/nepalez/assertion/compare/v0.2.0...HEAD)
+
 ## v0.2.1 2015-06-23
 
 ### Bugs Fixed

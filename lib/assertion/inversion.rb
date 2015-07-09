@@ -32,7 +32,7 @@ module Assertion
     # @private
     def initialize(assertion)
       @assertion = assertion
-      freeze
+      IceNine.deep_freeze(self)
     end
 
     # @!attribute [r] assertion

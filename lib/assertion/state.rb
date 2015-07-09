@@ -21,8 +21,8 @@ module Assertion
     # @private
     def initialize(state, *messages)
       @state = state
-      @messages = (state ? [] : messages.flatten.uniq).freeze
-      freeze
+      @messages = state ? [] : messages.flatten.uniq
+      IceNine.deep_freeze(self)
     end
 
     # @!attribute [r] messages

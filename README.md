@@ -15,14 +15,14 @@ Assertion
 [travis]: https://travis-ci.org/nepalez/assertion
 [inch]: https://inch-ci.org/github/nepalez/assertion
 
-Immutable assertions and validations for PORO.
+Standalone PORO assertions and validations.
 
 Synopsis
 --------
 
-The primary goal of the gem is to make assertions about <decoupled> objects.
+The primary goal of the gem is to make standalone assertions about objects and validate them.
 
-No `ActiveSupport`, no mutation of any instances.
+No monkey patching, no dependency from ActiveSupport, no mutable instances of any class.
 
 [About](https://github.com/mbj/mutant/issues/356) 100% [mutant]-covered.
 

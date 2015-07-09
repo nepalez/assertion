@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.author      = "Andrew Kozin"
   gem.email       = "andrew.kozin@gmail.com"
   gem.homepage    = "https://github.com/nepalez/assertion"
-  gem.summary     = "PORO assertions and validation"
+  gem.summary     = "Standalone PORO assertions and validations"
   gem.license     = "MIT"
 
   gem.files            = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = "~> 1.9"
 
   gem.add_runtime_dependency "i18n", "~> 0.7"
+  gem.add_runtime_dependency "ice_nine", "~> 0.11"
   gem.add_runtime_dependency "inflecto", "~> 0.0"
 
   gem.add_development_dependency "hexx-rspec", "~> 0.4"

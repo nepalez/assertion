@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require "inflecto"
+require "ice_nine"
 
 require_relative "assertion/dsl/caller"
 require_relative "assertion/dsl/attribute"

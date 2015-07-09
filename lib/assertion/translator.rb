@@ -73,13 +73,12 @@ module Assertion
     def initialize(assertion)
       @assertion = assertion
       @scope = self.class.scope(assertion)
-      freeze
+      IceNine.deep_freeze(self)
     end
 
     # Returns the message describing the desired state of given assertion
     #
-    # The translation is provided for the gem-specific scope for the
-    # current class
+    # The translation is provided in a gem-specific scope for the current class
     #
     # @param [Boolean] state The state of the assertion
     # @param [Hash] args The hash of arguments to be avaliable in a translation
