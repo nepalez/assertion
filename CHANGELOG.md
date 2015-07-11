@@ -1,4 +1,4 @@
-## Prepared for the next version
+## v0.2.2 2015-07-11
 
 ### Added
 
@@ -8,8 +8,9 @@
 ### Internal
 
 * Switched to `ice_nine` gem to freezing objects deeply (nepalez)
+* Switched to `inflecto` and dropped module own transformations (nepalez)
 
-[Compare v0.2.1...HEAD](https://github.com/nepalez/assertion/compare/v0.2.1...HEAD)
+[Compare v0.2.1...v0.2.2](https://github.com/nepalez/assertion/compare/v0.2.1...0.2.2)
 
 ## v0.2.1 2015-06-23
 
