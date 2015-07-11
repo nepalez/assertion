@@ -1,0 +1,10 @@
+# Translations of messages for examples in the `./assertion_spec.rb`
+---
+fr:
+  assertion:
+    is_adult:
+      truthy: "%{name} est majeur (%{age} ans)"
+      falsey: "%{name} est un enfant (%{age} ans)"
+    is_male:
+      truthy: "%{name} est un mâle"
+      falsey: "%{name} est une femelle"

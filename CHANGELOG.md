@@ -1,5 +1,10 @@
 ## Prepared for the next version
 
+### Added
+
+* New shared examples: `:validating_assertions`, and `:accepting_objects`
+  to specify assertions and guards correspondingly (nepalez)
+
 ### Internal
 
 * Switched to `ice_nine` gem to freezing objects deeply (nepalez)

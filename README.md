@@ -185,6 +185,68 @@ AdultOnly = Assertion.guards :state
 # => #<Assertion::NameError @message="AdultOnly#state is already defined">
 ```
 
+Testing
+-------
+
+The gem provides two sets of RSpec shared examples to specify assertions and guards in the expressive way.
+To include them, require `assertion/rspec`.
+
+### Assertions
+
+Use `:validating_attributes` example:
+
+```ruby
+require "spec_helper"
+require "assertion/rspec"
+
+describe IsAdult do # defines described_class
+  it_behaves_like :validating_attributes do
+    let(:attributes) { { name: "Joe", age: 10 } }
+    let(:locale)     { :fr                      } # :en by default
+
+    subject(:valid)   { false                        } # false by default
+    subject(:message) { "Joe est un enfant (10 ans)" } # can be skipped
+  end
+end
+```
+
+If the spec description doesn't declare `described_class` implicitly, you should define `assertion` explicitly:
+
+```ruby
+it_behaves_like :validating_attributes do
+  let(:assertion) { IsAdult }
+  # ...
+end
+```
+
+### Guards
+
+Use `:accepting_object` example:
+
+```ruby
+require "spec_helper"
+require "assertion/rspec"
+
+describe IsAdult do # defines described_class
+  it_behaves_like :accepting_object do
+    let(:object) { { name: "Joe", age: 10 } }
+    let(:locale) { :fr                      } # :en by default
+
+    subject(:accepted) { false                        } # false by default
+    subject(:message)  { "Joe est un enfant (10 ans)" } # can be skipped
+  end
+end
+```
+
+If the spec description doesn't declare `described_class` implicitly, you should define `guard` explicitly:
+
+```ruby
+it_behaves_like :accepting_object do
+  let(:guard) { AdultOnly }
+  # ...
+end
+```
+
 Installation
 ------------
 
