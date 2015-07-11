@@ -39,12 +39,17 @@ module Assertion
     extend DSL::Inversion
     extend DSL::Caller
 
-    # The translator of states for the current class
+    # The class-specific translator of assertion states
     #
-    # @return [Assertion::Translator]
+    # @private
     #
     def self.translator
       @translator ||= Translator.new(self)
+    end
+
+    # @private
+    def self.translate(state, attributes)
+      translator.call(state, attributes)
     end
 
     # @!attribute [r] attributes
@@ -84,7 +89,7 @@ module Assertion
     # @return [String]
     #
     def message(state = nil)
-      self.class.translator.call(state, attributes)
+      self.class.translate(state, attributes)
     end
 
     # Calls the assertion checkup and returns the resulting state
