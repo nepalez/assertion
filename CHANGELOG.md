@@ -1,3 +1,19 @@
+## v0.2.3 2015-07-12
+
+The version is bumped to fix bugs that proved to be hidden because of bugs in hexx-rspec and hexx-suit gems.
+
+### Bugs fixed
+
+* Fixed incompatibility to ruby 1.9.3 (nepalez)
+* Fixed Rakefile that tried to loade wrong version of Rake (nepalez)
+
+### Internals
+
+* Updated specs for compatibility to rubies 2.2-, jruby and rbx (nepalez)
+* Switched to updated 'hexx-rspec' (nepalez)
+
+[Compare v0.2.2...v0.2.3](https://github.com/nepalez/assertion/compare/v0.2.2...0.2.3)
+
 ## v0.2.2 2015-07-11
 
 ### Added
