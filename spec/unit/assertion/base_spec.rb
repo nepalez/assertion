@@ -54,7 +54,7 @@ describe Assertion::Base do
     let(:klass)      { Class.new(described_class) { attribute :foo } }
     let(:assertion)  { klass.new(foo: :FOO)                          }
 
-    shared_examples "translating" do |as: nil|
+    shared_examples "translating" do |options|
 
       let(:translator) { Assertion::Translator.new(klass) }
       let(:attributes) { assertion.attributes             }
@@ -67,7 +67,7 @@ describe Assertion::Base do
       end
 
       it "returns a translation" do
-        expect(subject).to eql translator.call(as, attributes)
+        expect(subject).to eql translator.call(options[:as], attributes)
       end
 
     end # shared examples

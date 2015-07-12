@@ -29,12 +29,12 @@ describe Assertion::Translator do
 
   describe "#call" do
 
-    shared_examples "translating" do |input, to: nil|
+    shared_examples "translating" do |input, opts|
 
       subject { translator.call(input) }
 
       let(:attributes) { { foo: :FOO, bar: :BAR } }
-      let(:output) { "translation missing: en.assertion.is_foo.#{to}" }
+      let(:output) { "translation missing: en.assertion.is_foo.#{opts[:to]}" }
 
       it "provides translation" do
         expect(translator.call input).to eql output

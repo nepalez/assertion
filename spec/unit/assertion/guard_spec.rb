@@ -8,7 +8,7 @@ describe Assertion::Guard do
     IsAdult   = Assertion.about(:age) { age.to_i >= 18 }
     AdultOnly = Class.new(described_class) do
       def state
-        IsAdult[object.to_h]
+        IsAdult[name: object.name, age: object.age]
       end
     end
   end

@@ -21,24 +21,25 @@ describe Assertion::DSL::Attribute do
 
     before { klass.send(:define_method, :object) { :object } }
 
-    shared_examples "aliasing #object" do |with: nil|
+    shared_examples "aliasing #object" do |options|
 
-      before { klass.attribute with }
+      before { klass.attribute options[:with] }
       let(:instance) { klass.new }
-      subject { instance.send with }
+      subject { instance.send options[:with] }
 
       it { is_expected.to eql instance.object }
 
     end # shared examples
 
-    shared_examples "complaining about wrong name" do |with: nil|
+    shared_examples "complaining about wrong name" do |options|
 
-      subject { klass.attribute with }
+      subject { klass.attribute options[:with] }
 
       it "fails" do
         expect { subject }.to raise_error do |error|
           expect(error).to be_kind_of NameError
-          expect(error.message).to eql "#{klass}##{with} is already defined"
+          expect(error.message)
+            .to eql "#{klass}##{options[:with]} is already defined"
         end
       end
 
