@@ -1,3 +1,19 @@
+## Prepared for v0.2.4
+
+### Added
+
+* Support for inline messages definition via `#falsey` and `#truthy` methods (nepalez)
+
+### Internal
+
+* Moved names `:falsey` and `:truthy` from `Translator` to `Base` (nepalez)
+
+### Todo
+
+* Add helper class methods `.falsey` and `.truthy` instead of regular instance methods
+
+[Compare v0.2.3...v0.2.4](https://github.com/nepalez/assertion/compare/v0.2.3...0.2.4)
+
 ## v0.2.3 2015-07-12
 
 The version is bumped to fix bugs that proved to be hidden because of bugs in hexx-rspec and hexx-suit gems.

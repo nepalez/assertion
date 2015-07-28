@@ -19,7 +19,7 @@ describe Assertion::Base do
 
   describe ".new" do
 
-    let(:klass) { Class.new(described_class) { attribute :foo, :bar } }
+    let(:klass) { Class.new(described_class) { attribute :foo, "bar" } }
 
     context "with attributes" do
 
@@ -67,7 +67,8 @@ describe Assertion::Base do
       end
 
       it "returns a translation" do
-        expect(subject).to eql translator.call(options[:as], attributes)
+        msg = options[:as] ? :truthy : :falsey
+        expect(subject).to eql translator.call(msg, attributes)
       end
 
     end # shared examples
@@ -83,6 +84,18 @@ describe Assertion::Base do
     it_behaves_like "translating", as: false do
       subject { assertion.message }
     end
+
+    context "when #truthy and #falsey defined" do
+
+      before { klass.send(:define_method, :truthy) { "foo" } }
+      before { klass.send(:define_method, :falsey) { "bar" } }
+
+      it "uses defined method" do
+        expect(assertion.message(true)).to eql "foo"
+        expect(assertion.message(false)).to eql "bar"
+      end
+
+    end # context
 
   end # describe #message
 

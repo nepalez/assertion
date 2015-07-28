@@ -49,10 +49,8 @@ describe Assertion::Translator do
 
     end # shared examples
 
-    it_behaves_like "translating", true,  to: "truthy"
-    it_behaves_like "translating", "ok",  to: "truthy"
-    it_behaves_like "translating", false, to: "falsey"
-    it_behaves_like "translating", nil,   to: "falsey"
+    it_behaves_like "translating", :truthy, to: "truthy"
+    it_behaves_like "translating", :falsey, to: "falsey"
 
   end # describe #call
 

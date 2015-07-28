@@ -17,16 +17,16 @@ Assertion
 
 Standalone PORO assertions and validations.
 
-Synopsis
---------
-
 The primary goal of the gem is to make standalone assertions about objects and validate them.
 
 No monkey patching, no dependency from ActiveSupport, no mutable instances of any class.
 
 [About](https://github.com/mbj/mutant/issues/356) 100% [mutant]-covered.
 
-### Basic Usage
+Synopsis
+--------
+
+### Make an Assertion
 
 Define an assertion by inheriting it from the `Assertion::Base` class with attributes to which it should be applied.
 Then implement the method `check` to describe if the assertion is truthy or falsey.
@@ -43,13 +43,15 @@ class IsAdult < Assertion::Base
 end
 ```
 
-or with more verbose builder:
+or with more expressive builder:
 
 ```ruby
 IsAdult = Assertion.about :age, :name do
   age.to_i >= 18
 end
 ```
+
+### Add Messages
 
 Define translations to describe both the *truthy* and *falsey* states of the assertion.
 
@@ -64,6 +66,28 @@ en:
       truthy: "%{name} is already an adult (age %{age})"
       falsey: "%{name} is a child yet (age %{age})"
 ```
+
+If you don't need to translate messages, define them for `truthy` and `falsey` states as methods:
+
+```ruby
+class IsAdult < Assertion::Base
+  attribute :age, :name
+
+  def check
+    age.to_i >= 18
+  end
+
+  def truthy
+    "#{name} is already an adult (age #{age})"
+  end
+
+  def falsey
+    "#{name} is a child yet (age #{age})"
+  end
+end
+```
+
+### Check a State
 
 Check a state of an assertion for some argument(s), using class method `[]`:
 
@@ -142,7 +166,7 @@ class VoterOnly < Assertion::Guard
 end
 ```
 
-Or using the verbose builder `Assertion.guards`:
+Or using the builder `Assertion.guards`:
 
 ```ruby
 VoterOnly = Assertion.guards :user do

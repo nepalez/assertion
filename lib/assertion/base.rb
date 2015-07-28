@@ -89,7 +89,9 @@ module Assertion
     # @return [String]
     #
     def message(state = nil)
-      self.class.translate(state, attributes)
+      msg = state ? :truthy : :falsey
+      return public_send(msg) if respond_to? msg
+      self.class.translate(msg, attributes)
     end
 
     # Calls the assertion checkup and returns the resulting state

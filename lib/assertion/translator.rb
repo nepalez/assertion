@@ -33,12 +33,6 @@ module Assertion
     #
     ROOT = :assertion
 
-    # The states to be translated with their dictionary names
-    #
-    # @return [Hash<Object => Symbol>]
-    #
-    DICTIONARY = { true => :truthy, false => :falsey }
-
     # Provides a scope for the class
     #
     # @param [Class] klass
@@ -86,7 +80,7 @@ module Assertion
     # @return [String] The translation
     #
     def call(state, args = {})
-      I18n.translate DICTIONARY[state ? true : false], args.merge(scope: scope)
+      I18n.translate state, args.merge(scope: scope)
     end
 
   end # class Translator
