@@ -2,8 +2,7 @@
 
 module Assertion
 
-  # Describes the state of the assertion applied to given arguments
-  # (the result of the checkup)
+  # Describes the composable state of the assertion
   #
   # @api public
   #

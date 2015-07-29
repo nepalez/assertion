@@ -6,17 +6,17 @@
 
 shared_context :assertion_translations do
 
-  def lang
+  def __locale__
     defined?(locale) ? locale : :en
   end
 
   # allows to skip check for error messages
-  def errors
+  def __messages__
     defined?(messages) ? Array[*messages] : nil
   end
 
   around do |example|
-    old, I18n.locale = I18n.locale, lang
+    old, I18n.locale = I18n.locale, __locale__
     example.run
     I18n.locale = old
   end
@@ -48,38 +48,38 @@ end # shared context
 shared_examples :validating_attributes do
 
   # allows to skip `assertion` definition when described_class is defined
-  def klass
+  def __assertion__
     defined?(assertion) ? assertion : described_class
   end
 
   # allows to skip `valid` definition to test messages only
-  def result
+  def __valid__
     defined?(valid) ? valid : false
   end
 
-  subject(:state) { klass[attributes] }
+  subject(:state) { __assertion__[attributes] }
 
   include_context :assertion_translations
 
   it "[validates]" do
-    expect(state.valid?).to eql(result), <<-REPORT.gsub(/.+\|/, "")
+    expect(state.valid?).to eql(__valid__), <<-REPORT.gsub(/.+\|/, "")
       |
-      |#{klass}[#{attributes.to_s[1..-2]}]
+      |#{__assertion__}[#{attributes.to_s[1..-2]}]
       |
-      |  expected: to be #{result ? "valid" : "invalid"}
+      |  expected: to be #{__valid__ ? "valid" : "invalid"}
       |       got: #{state.valid? ? "valid" : "invalid"}
     REPORT
   end
 
   it "[raises expected message]" do
-    if !result && state.invalid? && errors
+    if !__valid__ && state.invalid? && __messages__
       expect(state.messages)
-        .to match_array(errors), <<-REPORT.gsub(/.+\|/, "")
+        .to match_array(__messages__), <<-REPORT.gsub(/.+\|/, "")
           |
-          |Language: #{locale.to_s.upcase}
-          |Error messages from #{klass}[#{attributes.to_s[1..-2]}]
+          |Language: #{__locale__.to_s.upcase}
+          |Error messages from #{__assertion__}[#{attributes.to_s[1..-2]}]
           |
-          |  expected: #{errors.inspect}
+          |  expected: #{__messages__.inspect}
           |       got: #{state.messages.inspect}
         REPORT
     end
@@ -102,12 +102,12 @@ end # shared examples
 shared_examples :accepting_object do
 
   # allows to skip `guard` definition when described_class is defined
-  def klass
+  def __guard__
     defined?(guard) ? guard : described_class
   end
 
   # allows to skip `valid` definition to test messages only
-  def result
+  def __accepted__
     defined?(accepted) ? accepted : false
   end
 
@@ -116,11 +116,11 @@ shared_examples :accepting_object do
   include_context :assertion_translations
 
   it "[guards]" do
-    if result
+    if __accepted__
       expect { checkup }
         .not_to raise_error, <<-REPORT.gsub(/.+\|/, "")
           |
-          |#{klass}[#{object.inspect}]
+          |#{__guard__}[#{object.inspect}]
           |
           |  expected: #{object.inspect}
           |       got: #{begin; checkup; rescue => err; err.inspect; end}
@@ -129,7 +129,7 @@ shared_examples :accepting_object do
       expect { checkup }
         .to raise_error(Assertion::InvalidError), <<-REPORT.gsub(/.+\|/, "")
           |
-          |#{klass}[#{object.inspect}]
+          |#{__guard__}[#{object.inspect}]
           |
           |  expected: #<Assertion::InvalidError>
           |       got: #{object.inspect}
@@ -139,15 +139,15 @@ shared_examples :accepting_object do
 
   it "[raises expected message]" do
     begin
-      checkup if !result && errors
+      checkup if !__accepted__ && __messages__
     rescue => err
       expect(err.messages)
-        .to match_array(errors), <<-REPORT.gsub(/.+\|/, "")
+        .to match_array(__messages__), <<-REPORT.gsub(/.+\|/, "")
           |
-          |Language: #{locale.to_s.upcase}
-          |Error messages from #{klass}[#{object.inspect}]
+          |Language: #{__locale__.to_s.upcase}
+          |Error messages from #{__guard__}[#{object.inspect}]
           |
-          |  expected: #{errors.inspect}
+          |  expected: #{__messages__.inspect}
           |       got: #{err.messages.inspect}
         REPORT
     end

@@ -13,6 +13,17 @@ describe Assertion::DSL::Inversion do
       expect(subject.source).to eql klass
     end
 
-  end # describe .not
+  end # describe #not
+
+  describe "#!" do
+
+    subject { !klass }
+
+    it "creates the iverter for the current class" do
+      expect(subject).to be_kind_of Assertion::Inverter
+      expect(subject.source).to eql klass
+    end
+
+  end # describe #!
 
 end # describe Assertion::DSL::Inversion

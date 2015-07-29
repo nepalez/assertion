@@ -3,6 +3,7 @@
 ### Added
 
 * Support for inline messages definition via `#falsey` and `#truthy` methods (nepalez)
+* Alias method `!` for assertion `not` inverter (nepalez)
 
 ### Internal
 

@@ -28,6 +28,7 @@ module Assertion
       def not
         Inverter.new(self)
       end
+      alias_method :!, :not
 
     end # module Inversion
 

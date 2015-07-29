@@ -110,7 +110,7 @@ state.validate! # => #<Assertion::InvalidError @messages=["John is a child yet (
 Inversion
 ---------
 
-Use the `.not` *class* method to negate the assertion:
+Use the `.not` *class* method to invert the assertion:
 
 ```ruby
 jack = { name: 'Jack', age: 21, gender: :male }
@@ -118,6 +118,16 @@ jack = { name: 'Jack', age: 21, gender: :male }
 IsAdult.not[jack]
 # => #<Assertion::State @state=false, @messages=["Jack is already an adult (age 21)"]>
 ```
+
+You can also use `!` alias to provide the inversion:
+
+```ruby
+IsChild = !IsAdult
+IsChild[jack]
+# => #<Assertion::State @state=false, @messages=["Jack is already an adult (age 21)"]>
+```
+
+Notice that `!IsAdult[jack]` wouldn't work. Use either `IsAdult.not[jack]`, or `(!IsAdult)[jack]`.
 
 Composition
 -----------
@@ -140,7 +150,7 @@ en:
       falsey: "%{name} is a female"
 ```
 
-Use method `&` (or its aliases `+` or `>>`) to compose assertion states:
+Use method `&` (or its alias `+`) to compose assertion states:
 
 ```ruby
 jane = { name: 'Jane', age: 16, gender: :female }
