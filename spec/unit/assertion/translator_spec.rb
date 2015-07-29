@@ -20,13 +20,6 @@ describe Assertion::Translator do
 
   end # describe #assertion
 
-  describe "#scope" do
-
-    subject { translator.scope }
-    it { is_expected.to eql [:assertion, :is_foo] }
-
-  end # describe #scope
-
   describe "#call" do
 
     shared_examples "translating" do |input, opts|

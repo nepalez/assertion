@@ -40,7 +40,7 @@ module Assertion
       def __add_attribute__(name)
         __check_attribute__(name)
         define_method(name) { attributes.fetch(name) }
-        attributes << name.to_sym
+        attributes << name
       end
 
       def __check_attribute__(name)

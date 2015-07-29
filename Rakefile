@@ -21,5 +21,5 @@ end
 
 desc "Runs mutation metric for testing"
 task :mutant do
-  system "mutant -r ./spec/spec_helper --use rspec 'Assertion*'"
+  system "bundle exec mutant -r ./spec/spec_helper --use rspec 'Assertion*'"
 end

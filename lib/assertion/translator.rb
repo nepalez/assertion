@@ -33,16 +33,6 @@ module Assertion
     #
     ROOT = :assertion
 
-    # Provides a scope for the class
-    #
-    # @param [Class] klass
-    #
-    # @return [Array<Symbol>]
-    #
-    def self.scope(klass)
-      [ROOT, Inflecto.underscore(klass).to_sym]
-    end
-
     # @!attribute [r] scope
     #
     # @return [Array<Symbol>] the scope for translations
@@ -66,7 +56,7 @@ module Assertion
     # @private
     def initialize(assertion)
       @assertion = assertion
-      @scope = self.class.scope(assertion)
+      @scope = "#{ROOT}.#{Inflecto.underscore assertion}"
       IceNine.deep_freeze(self)
     end
 
