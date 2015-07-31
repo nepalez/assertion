@@ -1,4 +1,4 @@
-## Prepared for v0.2.4
+## v0.2.4 2015-07-31
 
 ### Added
 
@@ -9,11 +9,7 @@
 
 * Moved names `:falsey` and `:truthy` from `Translator` to `Base` (nepalez)
 
-### Todo
-
-* Add helper class methods `.falsey` and `.truthy` instead of regular instance methods
-
-[Compare v0.2.3...v0.2.4](https://github.com/nepalez/assertion/compare/v0.2.3...0.2.4)
+[Compare v0.2.3...v0.2.4](https://github.com/nepalez/assertion/compare/v0.2.3...v0.2.4)
 
 ## v0.2.3 2015-07-12
 
