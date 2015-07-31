@@ -35,6 +35,12 @@ module Assertion
     extend DSL::Attribute
     extend DSL::Caller
 
+    # @!attribute [r] object
+    #
+    # @return [Object] The object to be guarded
+    #
+    attr_reader :object
+
     # @!scope class
     # @!method new(object)
     # Creates the guard instance for the provided object
