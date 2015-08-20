@@ -1,3 +1,11 @@
+## v0.2.5 2015-08-20
+
+### Bugs Fixed
+
+* Fixed required ruby version constraint (nepalez)
+
+[Compare v0.2.4...v0.2.5](https://github.com/nepalez/assertion/compare/v0.2.4...v0.2.5)
+
 ## v0.2.4 2015-07-31
 
 ### Added
