@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.extra_rdoc_files = Dir["README.md", "LICENSE"]
   gem.require_paths    = ["lib"]
 
-  gem.required_ruby_version = "~> 1.9"
+  gem.required_ruby_version = ">= 1.9.3"
 
   gem.add_runtime_dependency "i18n", "~> 0.7"
   gem.add_runtime_dependency "ice_nine", "~> 0.11"
